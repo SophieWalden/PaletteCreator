@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://{username}.github.io/paletteCreator/",
+  "homepage": "https://sophiewalden.github.io/PaletteCreator/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
