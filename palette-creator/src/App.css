@@ -1,42 +1,105 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body{
+  background-color: #f2f2f2 ;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  box-shadow: 0vw 0vw 3vw 3vw rgb(198, 198, 198) inset;
+  gap:0px;
+  padding-bottom: 0;
+  margin-bottom:0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+#site-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 95vh;
+  padding-top:0;
+  margin-top:0;
 }
 
-.card {
-  padding: 2em;
+#drag-drop:hover{
+  width: 82vw !important;
+  height: 42vh;
+  border: dotted black 2px;
 }
 
-.read-the-docs {
-  color: #888;
+#drag-drop{
+  width: 80vw;
+  height: 40vh;
+  border: solid black 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transition: width 0.2s, height 0.2s;
+
+  font-size: 2vw;
+
+}
+
+.color-holder{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 85vw;
+  height: 30vh;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.color-display{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 13vw;
+  height: 30vh;
+  border-radius: 20px;
+  transition: width 0.2s, height 0.2s;
+  border: dotted black 1px;
+}
+
+.color-display:hover{
+  width: 14vw;
+  height: 31vh;
+}
+
+.hex-display:hover{
+  display:block !important;
+}
+
+.hex-display{
+  display: none;
+}
+
+.title{
+  font-size: 1.5vw;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding-top: 2vh;
+}
+
+.color-display:hover .copy-icon{
+  display: block !important;
+}
+
+.color-display:active .copy-icon{
+  opacity: 0.9 !important;
+}
+
+.copy-icon{
+  width: 5vw;
+  height: auto;
+  display: none;
+  opacity: 0.5;
+
 }

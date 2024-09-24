@@ -2,24 +2,64 @@ import { useState, resolve } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Color from 'color-thief-react';
+import {Palette} from 'color-thief-react';
+import React, {useCallback} from 'react'
+import {useDropzone} from 'react-dropzone'
 
-
-
+const Loading = () => <div>Loading...</div>;
 function App() {
-  const [count, setCount] = useState(0)
-  const [image, setImage] = useState("https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630");
+  const [image, setImage] = useState("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3AtNDQ4LXBhaS02NTQuanBn.jpg");
+  
+  const onDrop = useCallback(acceptedFiles => {
+    let reader = new FileReader();
+    let file = acceptedFiles[0];
+
+    reader.onloadend = () => {
+      setImage(reader.result);
+    }
+
+    reader.readAsDataURL(file)
+  }, [])
+
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+  
+  function copyToClipboard(color){
+    navigator.clipboard.writeText(color);
+  }
 
   return (
-    <>
-       <Color src={image}  crossOrigin="anonymous" format="hex">
-        {({ data, loading, error }) => (
-          <div style={{ color: data }}>
-            Text with the predominant color {data}
+    <div id="container">
+        <h3 className="title">Image to Palette Generator</h3>
+
+        <div id="site-container">
+          <div id="drag-drop" {...getRootProps()}>
+            <input {...getInputProps()} />
+            {
+              isDragActive ?
+                <p>Drop the image here ...</p> :
+                <p>Drag 'n' drop some images here, or click to select image</p>
+            }
           </div>
-        )}
-        </Color>
-    </>
+
+        <Palette src={image}  crossOrigin="anonymous" format="hex" colorCount={5}>
+          {({ data, loading }) => {
+              if (loading) return <Loading />;
+              return (
+                <div className="color-holder">
+
+                    {data.map((color, index) => (
+                      <div onClick={() => copyToClipboard(color)} className="color-display" key={index} style={{ backgroundColor: color }}>
+                        <img className="copy-icon" src="https://cdn-icons-png.flaticon.com/512/178/178921.png"></img>
+                      </div>
+                    ))}
+                </div>
+              );
+            }}
+        </Palette>
+        </div>
+      
+
+    </div>
   )
 }
 
